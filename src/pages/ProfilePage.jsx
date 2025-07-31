@@ -167,7 +167,7 @@ const ProfilePage = () => {
                             <h2 className="mt-4 text-2xl font-bold text-white">
                                 {username || 'Your Profile'}
                             </h2>
-                            <p className="text-orange-100">{user?.email}</p>
+                            <p className="text-green-100">{user?.email}</p>
                         </div>
                     </div>
 
@@ -191,7 +191,7 @@ const ProfilePage = () => {
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                         className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md 
-                             focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                             focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                                         required
                                     />
                                 </div>
@@ -226,8 +226,8 @@ const ProfilePage = () => {
                                 type="submit"
                                 disabled={loading}
                                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium 
-                                 rounded-md text-white bg-rose-600 hover:bg-orange-700 focus:outline-none focus:ring-2 
-                                focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 cursor-pointer"
+                                 rounded-md text-white bg-rose-600 hover:bg-green-700 focus:outline-none focus:ring-2 
+                                focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 cursor-pointer"
                             >
                                 {loading ? 'Saving...' : 'Save Changes'}
                                

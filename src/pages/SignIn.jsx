@@ -57,7 +57,7 @@ const SignIn = () => {
               <input
                 id="email"
                 type="email"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +74,7 @@ const SignIn = () => {
               <input
                 id="password"
                 type="password"
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -86,7 +86,7 @@ const SignIn = () => {
 
             <button
               type="submit"
-              className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-opacity-50 transition duration-200 disabled:cursor-not-allowed disabled:bg-orange-700"
+              className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-200 disabled:cursor-not-allowed disabled:bg-green-700"
               disabled={isLoading}
             >
               {isLoading ? 'Signing in...' : 'Sing In'}
@@ -97,7 +97,7 @@ const SignIn = () => {
           <div className="text-center mt-6">
             <p className="text-gray-600 text-sm">
               Don't have an account?{' '}
-              <Link to="/signup" className="text-orange-600 hover:text-orange-800 font-semibold">
+              <Link to="/signup" className="text-green-600 hover:text-green-800 font-semibold">
                 Sign up
               </Link>
             </p>

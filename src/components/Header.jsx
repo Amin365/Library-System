@@ -24,11 +24,11 @@ const Header = () => {
          <div className='flex'>
                         <div className='flex items-center ml-9 '>
                             <Link to={'/'}
-                                className='text-2xl font-bold text-orange-600'
+                                className='text-2xl font-bold text-green-600'
                             >AMB</Link>
                         </div>
                         <nav className='hidden sm:flex sm:ml-6 sm:space-x-8'>
-                            <Link to={'/'} className='inline-flex items-center px-1 pt-1 border-b-2 border-orange-500 text-base font-medium text-gray-900 capitalize'>Home</Link>
+                            <Link to={'/'} className='inline-flex items-center px-1 pt-1 border-b-2 border-green-500 text-base font-medium text-gray-900 capitalize'>Home</Link>
                             <Link to={'/dashboard/dashboardhome'} className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-base font-medium text-gray-900 capitalize'>dashboard</Link>
                         </nav>
                     </div>
@@ -132,7 +132,7 @@ const Header = () => {
                                 <div className='space-x-4'>
                                     
                                     <Link to={'/signin'}
-                                        className=' sm:inline-flex items-center justify-center px-4 py-2 border text-sm font-medium rounded-md text-orange-600 bg-white hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-orange-500'
+                                        className=' sm:inline-flex items-center justify-center px-4 py-2 border text-sm font-medium rounded-md text-green-600 bg-white hover:bg-green-50 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-green-500'
                                     > Sign In</Link>
                                     
                                 </div>

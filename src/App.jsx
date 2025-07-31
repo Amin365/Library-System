@@ -13,6 +13,8 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import ProfilePage from "./pages/ProfilePage";
 import  { Toaster } from 'react-hot-toast';
 import Books from "./pages/Books";
+import Members from "./pages/Members";
+import BookList from "./pages/BookList";
 
 function App() {
   return (
@@ -57,6 +59,8 @@ function App() {
              
             } />
             <Route path="Books" element={<Books />} />
+            <Route path="memebers" element={<Members />} />
+            <Route path="BookList" element={<BookList />} />
               
             </Route>
           </Routes>
