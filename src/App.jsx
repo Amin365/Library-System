@@ -66,7 +66,26 @@ function App() {
           </Routes>
         </main>
       </div>
-      <Toaster/>
+      <Toaster
+  position="top-right"
+  toastOptions={{
+    duration: 3000,
+    style: {
+      background: '#333',
+      color: '#fff',
+    },
+    success: {
+      iconTheme: {
+        primary: '#4CAF50',
+        secondary: '#fff',
+      },
+    },
+  }}
+  containerStyle={{
+    top: 20,
+    right: 20,
+  }}
+/>
     </AuthProvider>
   );
 }

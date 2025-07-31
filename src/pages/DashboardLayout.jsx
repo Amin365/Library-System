@@ -19,7 +19,7 @@ function DashboardLayout() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100 ">
       {/* Hamburger menu only on mobile */}
       {!sidebarOpen && (
         <button
@@ -34,7 +34,7 @@ function DashboardLayout() {
       {/* Sidebar */}
       <aside
         className={`
-          fixed top-0 left-0 min-h-screen w-64 bg-white shadow-lg z-40 transform transition-transform duration-300
+          fixed top-0 left-0 min-h-screen w-55 bg-white shadow-lg z-40 transform transition-transform duration-300
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
           md:static md:translate-x-0 md:w-64 md:block
         `}
@@ -75,7 +75,7 @@ function DashboardLayout() {
       )}
 
       {/* Page Content */}
-      <main className="flex-1 p-6 md:ml-64 transition-all duration-300">
+      <main className="  transition-all duration-300 w-full md:w-[75%] md:ml-10 mt-4">
         <Outlet />
       </main>
     </div>

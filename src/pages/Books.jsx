@@ -58,7 +58,7 @@ function Books() {
     
      
       <div className='min-h-screen  py-8  px-4'>
-            <div className='max-w-md w-full'>
+            <div className='max-w-md w-full mx-auto'>
             
               <div className='text-center mb-10'>
                 <h1 className='text-3xl font-bold'> 
