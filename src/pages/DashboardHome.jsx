@@ -134,9 +134,9 @@ function DashboardHome() {
 
           (
             <div className=" max-w-7xl mx-auto ">
-              <h1 className="mb-9 font-bold text-xl ">Welcome to the Dashboard {profile?.username}</h1>
+              <h1 className="mb-9 font-bold md:text-xl text-center text-sm ">Welcome to the Dashboard {profile?.username}</h1>
               <div className="flex gap-4 flex-wrap md:flex-cols   space-x-2 ">
-                <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:w-[32%] md:ml-0 ml-9 rounded-md">
+                <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:w-[29%] md:ml-0 ml-4 rounded-md">
                   <div className="flex items-center gap-12   ">
                     <div className="bg-green-100 p-3 rounded-lg ">
                       <IoBookOutline className="text-4xl text-green-500" />
@@ -148,7 +148,7 @@ function DashboardHome() {
                     </div>
                   </div>
                 </div>
-                <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:w-[32%] md:ml-0 ml-9 rounded-md">
+                <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:w-[29%] md:ml-0 ml-4 rounded-md">
                   <div className="flex items-center gap-12 ">
                     <div className="bg-green-100 p-4 rounded-lg ">
                       <IoPeopleSharp className="text-4xl text-green-500" />
@@ -160,7 +160,7 @@ function DashboardHome() {
                     </div>
                   </div>
                 </div>
-                <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:ml-0 ml-9 md:w-[32%] rounded-md">
+                <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:ml-0 ml-4 md:w-[29%] rounded-md">
                   <div className="flex items-center gap-12 py-1 px-2">
                     <div className="bg-green-100 p-4 rounded-lg ">
                       <IoBookOutline className="text-4xl text-green-500" />
