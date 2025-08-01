@@ -19,7 +19,7 @@ const SignIn = () => {
 
   try {
     await signIn(email, password);
-    navigate('/dashboard'); 
+    navigate('/dashboard/DashboardHome'); 
   } catch (err) {
     setError(err.message || 'Failed to sign in');
   } finally {

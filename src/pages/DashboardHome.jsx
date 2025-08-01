@@ -14,6 +14,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { formatDistanceToNow } from 'date-fns'
 
 
 
@@ -25,6 +26,7 @@ function DashboardHome() {
   const [isOnline, setIsOnline] = useState(navigator.onLine)
   const [activeTab, setActiveTab] = useState("Today");
   const{profile}=useAuth()
+  console.log("justo for testing",formatDistanceToNow)
 
   const chartData = {
   Today: [
@@ -255,16 +257,19 @@ function DashboardHome() {
         <table className="w-full text-sm text-left text-gray-700 divide-y divide-gray-500 mt-6">
           <thead className="bg-gray-50">
             <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+            <th className="px-6 py-3 text-left text-sm  text-gray-900 uppercase tracking-wider font-bold">Name</th>
 
-              <th  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Career</th>
+              <th  className="px-6 py-3 text-left text-sm  text-gray-900 uppercase tracking-wider font-bold">Date added</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {member.slice(-5).reverse().map((m, i) => (
               <tr key={i} className="border-b">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate max-w-xs">{m.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate max-w-xs">{m.career}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 truncate max-w-xs">{m.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 truncate max-w-xs">
+                 {formatDistanceToNow(new Date(m.created_at),{ addSuffix: true })}
+                
+                </td>
               </tr>
             ))}
           </tbody>
@@ -275,16 +280,18 @@ function DashboardHome() {
         <table className="w-full text-sm text-left text-gray-700 divide-y divide-gray-500 mt-6">
           <thead className="bg-gray-50">
             <tr>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name Of Books</th>
+            <th className="px-6 py-3 text-left text-sm  text-gray-900 uppercase tracking-wider font-bold">Name Of Books</th>
 
-              <th  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date Added</th>
+              <th  className="px-6 py-3 text-left text-sm  text-gray-900 uppercase tracking-wider font-bold">Date Added</th>
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {books.slice(-5).reverse().map((m, i) => (
               <tr key={i} className="border-b">
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate max-w-xs">{m.name}</td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 truncate max-w-xs"> {new Date(m.created_at).toLocaleDateString()}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 truncate max-w-xs">{m.name}</td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-500 truncate max-w-xs"> 
+                {formatDistanceToNow(new Date(m.created_at),{ addSuffix: true })}
+                </td>
               </tr>
             ))}
           </tbody>
