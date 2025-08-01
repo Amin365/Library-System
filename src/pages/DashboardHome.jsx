@@ -188,7 +188,20 @@ function DashboardHome() {
 
 
     </div>
-   <div className="max-w-7xl mx-auto w-full">
+    {
+      !isOnline?(
+        <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
+            <RiWifiOffLine className="mx-auto h-12 w-12 text-red-500 mb-4" />
+            <h3 className="text-lg font-medium text-red-800 mb-2">  You are offline. Please check your internet connection.</h3>
+            <button
+
+              className="mt-4 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors duration-200"
+            >
+              Try Again
+            </button>
+          </div>
+
+      ): <div className="max-w-7xl mx-auto w-full">
         {/* 📊 Reports Chart with Tab Switcher */}
     <div className="bg-white shadow-lg rounded-xl p-6 mt-10 ">
       <div className="flex justify-between items-center mb-6">
@@ -284,6 +297,8 @@ function DashboardHome() {
  
 
    </div>
+    }
+  
 
 
     </>

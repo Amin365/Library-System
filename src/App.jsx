@@ -67,25 +67,32 @@ function App() {
         </main>
       </div>
       <Toaster
-  position="top-right"
-  toastOptions={{
-    duration: 3000,
-    style: {
-      background: '#333',
-      color: '#fff',
-    },
-    success: {
-      iconTheme: {
-        primary: '#4CAF50',
-        secondary: '#fff',
-      },
-    },
-  }}
-  containerStyle={{
-    top: 20,
-    right: 20,
-  }}
-/>
+
+        position="top-right"
+        toastOptions={{
+          style: {
+            borderRadius: '12px',
+            background: '#fff',
+            color: '#333',
+            padding: '12px 16px',
+            fontWeight: 500,
+            boxShadow: '0 8px 30px rgba(0,0,0,0.1)'
+          },
+          success: {
+            iconTheme: {
+              primary: '#22c55e',
+              secondary: '#d1fae5',
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: '#ef4444',
+              secondary: '#fee2e2',
+            },
+          },
+        }}
+      />
+
     </AuthProvider>
   );
 }
