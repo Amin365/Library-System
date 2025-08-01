@@ -23,11 +23,11 @@ function DashboardLayout() {
       {/* Hamburger menu only on mobile */}
       {!sidebarOpen && (
         <button
-          className="md:hidden fixed top-3 left-2 z-50  p-2  "
+          className="md:hidden fixed top-3 left-1 z-50  p-2  "
           onClick={() => setSidebarOpen(true)}
           aria-label="Open sidebar"
         >
-          <CiMenuBurger size={28} />
+          <CiMenuBurger size={28}  />
         </button>
       )}
 
@@ -69,7 +69,7 @@ function DashboardLayout() {
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-30 z-30 md:hidden"
+          className="fixed inset-0 bg-[rgba(0,0,0,0.6)] z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

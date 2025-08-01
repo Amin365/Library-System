@@ -21,13 +21,13 @@ const Header = () => {
     <div className='max-w-7xl mx-auto px-4 md:px-6 lg:px-8'>
     <div className='flex  justify-between h-16'>
         
-         <div className='flex'>
-                        <div className='flex items-center ml-12 '>
+         <div className='flex ml-8'>
+                        <div className='flex items-center  '>
                             <Link to={'/'}
                                 className='text-2xl font-bold text-green-600'
                             >AMB</Link>
                         </div>
-                        <nav className='items-center flex ml-8 space-x-8'>
+                        <nav className='items-center flex ml-8 space-x-4'>
                             <Link to={'/'} className='inline-flex items-center px-1 pt-1 border-b-2 border-green-500 text-base font-medium text-gray-900 capitalize pointer-curser'>Home</Link>
                             <Link to={'/dashboard/dashboardhome'} className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-base font-medium text-gray-900 capitalize'>dashboard</Link>
                         </nav>
