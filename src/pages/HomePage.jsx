@@ -4,9 +4,13 @@ import { FiArrowRight } from 'react-icons/fi'
 import { SiBookstack } from "react-icons/si";
 import { CiFacebook } from "react-icons/ci";
 import { MdOutlineNotificationImportant } from "react-icons/md";
+import Faq from '../components/Faq';
+
+
 
 
 const HomePage = () => {
+ 
 
   return (
     <div className="bg-gray-100" >
@@ -35,7 +39,7 @@ const HomePage = () => {
        <div className='text-center mt-10 max-w-7xl mx-auto'>
        
   <h1 className='text-gray-900 text-4xl font-bold mb-12 border-b-4 border-green-500 border-x px-2 inline-block '>About Us</h1>
-  <p className='text-gray-600 text-center leading-loose	 text-xl mb-4'>  
+  <p className='text-gray-600 text-center leading-loose	 text-xl mb-4 title'>  
   We are not just a library — we are a space where curiosity meets opportunity. Our mission is to make reading accessible, enjoyable, and meaningful for everyone. With a vast collection of books across every subject, age group, and interest, we aim to inspire a culture of learning, creativity, and lifelong growth.
 
 Whether you're a student preparing for exams, a researcher diving deep into knowledge, or someone who simply loves to get lost in a good story — our library welcomes you. We believe that books have the power to open minds, build confidence, and shape the future.
@@ -123,8 +127,15 @@ Join us, and become part of a community that believes in the power of words, the
  
 
  </div>
-     
-     {/* footer */}
+
+
+{/* FAq */}
+
+<div>
+  <Faq/>
+</div>
+
+
 
      <footer>
         <div className="bg-gray-800 text-white py-8">
