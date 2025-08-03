@@ -1,95 +1,156 @@
-import React, { useState } from "react"
-import { FiPlus } from "react-icons/fi"
+import { Link } from 'react-router'
+import logos from '../assets/reading.png'
+import { FiArrowRight } from 'react-icons/fi'
+import { SiBookstack } from "react-icons/si";
+import { CiFacebook } from "react-icons/ci";
 
 
 const HomePage = () => {
-     const [Addmember, setMember] = useState(false)
+
   return (
-    <div>
-         <div className="bg-white rounded-xl shadow-md p-12 text-center">
-                                <div className="mx-auto w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                                    <FiPlus className="h-10 w-10 text-green-600" />
-                                </div>
-                                <h2 className="text-2xl font-bold text-gray-900 mb-2">No Member Yet</h2>
-                                <p className="text-gray-500 max-w-md mx-auto mb-8">
-                                    You haven't created any Member yet. 
-                                </p>
-                                <button
-                                    to="/editor"
-                                    className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-xl shadow-md hover:bg-green-700 transition-colors duration-200"
-                                     onClick={()=>setMember(!Addmember)}
-                                >
-                                    <FiPlus className="mr-2" />
-                                    Create Your First Member
-                                </button>
-                            </div>
-                                           {
-  Addmember && (
-    <div
-      className="fixed inset-0 bg-[rgba(0,0,0,0.6)]  flex items-center justify-center z-50"
-      onClick={() => setMember(false)} // clicking outside closes the modal
-    >
-      <div
-        className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
-        onClick={(e) => e.stopPropagation()} // prevent click inside modal from closing
-      >
-        {/* Modal content */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold">Add Member</h1>
-          <p className="text-gray-600 mt-2">Join our community and start sharing your ideas</p>
-        </div>
-
-        <form >
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Full Name</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="Name of Member"
-            //   value={name}
-            //   onChange={(e) => setname(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Career</label>
-            <input
-              type="text"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="Bsc/Master"
-            //   value={career}
-            //   onChange={(e) => setcareer(e.target.value)}
-              required
-            />
-          </div>
-
-          <div className="mb-6">
-            <label className="block text-gray-700 text-sm font-semibold mb-2">Telephone</label>
-            <input
-              type="number"
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-              placeholder="Enter their number"
-            //   value={tell}
-            //   onChange={(e) => settell(e.target.value)}
-              required
-            />
-          </div>
-
-          {/* <button
-            type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 disabled:opacity-50"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Creating Meber...' : 'Create Member'}
-          </button> */}
-        </form>
-      </div>
-    </div>
-  )
-}
-    </div>
+    <div className="bg-gray-100" >
+     <div className=" bg-gradient-to-r from-green-400 to-green-800 overflow-hidden">
+         <div className=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
  
+           <div className="text-center">
+             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+             Welcome to your gateway of knowledge
+             </h1>
+             <p className="text-xl md:text-2xl text-orange-100 max-w-2xl mx-auto mb-8 w-full">
+         Ready to learn, dream, and grow? Start by borrowing your next great read.
+             </p>
+             <Link
+               to="/issue"
+               className="inline-flex items-center px-8 py-4 rounded-full bg-white text-orange-600 font-semibold hover:bg-orange-50 transition-colors duration-200"
+             >
+               📖 Borrow a Book Now
+               <FiArrowRight className="ml-2 h-5 w-5" />
+             </Link>
+           </div> 
+         </div>
+       </div>
+
+       {/* ABout us */}
+       <div className='text-center mt-10 max-w-7xl mx-auto'>
+       
+  <h1 className='text-gray-900 text-4xl font-bold mb-12 border-b-4 border-green-500 border-x px-2 inline-block '>About Us</h1>
+  <p className='text-gray-600 text-center leading-loose	 text-xl mb-4'>  
+  We are not just a library — we are a space where curiosity meets opportunity. Our mission is to make reading accessible, enjoyable, and meaningful for everyone. With a vast collection of books across every subject, age group, and interest, we aim to inspire a culture of learning, creativity, and lifelong growth.
+
+Whether you're a student preparing for exams, a researcher diving deep into knowledge, or someone who simply loves to get lost in a good story — our library welcomes you. We believe that books have the power to open minds, build confidence, and shape the future.
+
+Here, borrowing a book isn’t just a transaction — it’s the start of a new journey. Our easy borrowing system ensures that you can access the resources you need with just a few clicks.
+
+Join us, and become part of a community that believes in the power of words, the value of education, and the joy of reading.
+  
+  
+  </p>
+       </div>
+
+     
+
+ {/* why you Choos ing Us  */}
+ <div className='max-w-7xl mx-auto mt-16 '>
+ <div className='text-center'>
+  <h2 className='text-3xl font-bold text-gray-800 mb-6'>Why Choose Us?</h2>
+    <p className='text-gray-600 mb-4'>We are dedicated to providing a seamless and enriching reading experience for all our users.</p>
+
+ </div>
+ <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-8 py-12'>
+ <div className='bg-white shadow-lg rounded-lg hover:border-green-500 border border-transparent transition-all duration-300 p-8 mt-10'>
+ <div className='flex justify-center items-center mb-6  '>
+      
+        <h1  className='bg-green-100 text-green-500 p-4 rounded-lg text-5xl'>{<SiBookstack/>}</h1>
+        
+ </div>
+ 
+ <h1 className='text-xl font-bold mb-6 text-center'>Thousands of Books, One Click Away</h1>
+ <p className='mb-4 text-center text-gray-400 text-base'>From fiction to science, our library offers a rich collection for every reader and every interest.</p>
+<div className='flex items-center justify-center py-4'>
+   <button className='px-4 py-3 bg-green-400 rounded-full text-white text-xl '>Get Started</button>
+
+</div>
+
+   
+
+
+    
+
+ </div>
+ <div className='bg-white shadow-lg rounded-lg hover:border-green-500 border border-transparent transition-all duration-300 p-8 mt-10'>
+ <div className='flex justify-center items-center mb-6  '>
+      
+        <h1  className='bg-green-100 text-green-500 p-4 rounded-lg text-5xl'>{<SiBookstack/>}</h1>
+        
+ </div>
+ 
+ <h1 className='text-xl font-bold mb-6 text-center'>Thousands of Books, One Click Away</h1>
+ <p className='mb-4 text-center text-gray-400 text-base'>From fiction to science, our library offers a rich collection for every reader and every interest.</p>
+<div className='flex items-center justify-center py-4'>
+   <button className='px-4 py-3 bg-green-400 rounded-full text-white text-xl '>Get Started</button>
+
+</div>
+
+   
+
+
+    
+
+ </div>
+ <div className='bg-white shadow-lg rounded-lg hover:border-green-500 border border-transparent transition-all duration-300 p-8 mt-10'>
+ <div className='flex justify-center items-center mb-6  '>
+      
+        <h1  className='bg-green-100 text-green-500 p-4 rounded-lg text-5xl'>{<SiBookstack/>}</h1>
+        
+ </div>
+ 
+ <h1 className='text-xl font-bold mb-6 text-center'>Thousands of Books, One Click Away</h1>
+ <p className='mb-4 text-center text-gray-400 text-base'>From fiction to science, our library offers a rich collection for every reader and every interest.</p>
+<div className='flex items-center justify-center py-4'>
+   <button className='px-4 py-3 bg-green-400 rounded-full text-white text-xl '>Get Started</button>
+
+</div>
+
+   
+
+
+    
+
+ </div>
+
+ </div>
+ 
+
+ </div>
+     
+     {/* footer */}
+
+     <footer>
+        <div className="bg-gray-800 text-white py-8">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p className="text-base">© 2024 Your Library. All rights reserved.</p>
+            <p className="text-base mt-2">Follow us on social media for updates and events.</p>
+          </div>
+          <div className="flex justify-center mt-4">
+          <div className='flex gap-1'>
+          {<CiFacebook className="text-white text-2xl hover:text-green-400 transition-colors duration-200" />}
+             <a href="#" className="text-white mx-2 hover:text-green-400">Facebook</a>
+          </div>
+           
+            <a href="#" className="text-white mx-2 hover:text-green-400">Twitter</a>
+            <a href="#" className="text-white mx-2 hover:text-green-400">Instagram</a>
+        </div>
+          </div>
+        
+      </footer>
+     
+
+
+
+    </div>
+
+
+
 
   )
 }

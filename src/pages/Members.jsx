@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import { FiAlertTriangle, FiEdit2, FiEye, FiPlus, FiTrash2 } from 'react-icons/fi'
-import { createMember, getMembers } from '../lib/member'
-import { useNavigate } from 'react-router'
+import { FiAlertTriangle, FiEdit2, FiEye, FiLoader, FiPlus, FiTrash2 } from 'react-icons/fi'
+import { IoReturnDownBackSharp } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
+import { createMember, deleteMember, getMembers,updateMember } from '../lib/member'
+
+import { Link, useNavigate } from 'react-router'
 import { FaSearch } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { RiWifiOffLine } from "react-icons/ri";
+
 const Members = () => {
     const [Member, setMembers] = useState([])
     const [Addmember, setMember] = useState(false)
@@ -19,6 +23,57 @@ const Members = () => {
     const [searchTerm, setSearchTerm] = useState("")
     const [searchVisible, setSearchVisible] = useState(false)
     const [isOnline, setIsOnline] = useState(navigator.onLine)
+    const[Download,setDownload]=useState(false)
+    const[selectedMember,setSelectedMember]=useState(null)
+    const[IsEditing,setEditing]=useState(false)
+    const[MemberData,setMemberData]=useState({
+        name:'',
+        career:'',
+        tellephone:''
+    })
+      const [confirmDelete, setConfirmDelete] = useState(false)
+    const [MemberDelete, setMemberToDelete] = useState(null)
+    const [isDeleting, setIsDeleting] = useState(false)
+    
+    const handleDelete = async () => {
+      if (!MemberDelete) return
+    
+      setIsDeleting(true)
+      try {
+        await deleteMember(MemberDelete.id)
+        setConfirmDelete(false)
+        setMemberToDelete(null)
+        FetchMembers()
+        toast.success('successfully Deleted')
+      } catch (err) {
+        toast.error("Failed to delete: " + err.message)
+      } finally {
+        setIsDeleting(false)
+      }
+    }
+    
+
+    const handleEdit=(member)=>{
+        setMemberData({
+            name:member.name,
+            career:member.career,
+            tellephone:member.tellephone
+        })
+        setSelectedMember(member)
+        setEditing(true)
+    }
+const HandleUpdate=async()=>{
+    try {
+        await updateMember(selectedMember.id,MemberData)
+        setEditing(false)
+        FetchMembers()
+          toast.success("SuccessFully Updated")
+        
+    } catch (error) {
+        toast.error("Failed to update book: " + error.message)
+        
+    }
+}
 
     const filteredmember = Member.filter((member) =>
         member.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -167,6 +222,23 @@ const Members = () => {
                         </div>
 
                         <div className="bg-white rounded-xl overflow-hidden shadow-md p-4">
+                        <Link
+               to="/dashboard/DashboardHome"
+               className="inline-flex items-center px-6 py-1 rounded-full bg-green-100 text-green-500 font-semibold  transition-colors duration-200 mb-4"
+             >
+              <IoReturnDownBackSharp  className="  p-2 text-5xl" />
+                 Back to the Dashboard
+              
+             </Link>
+                      
+                        
+                      
+                       
+
+                       
+                       
+
+                        
 
                             <div className="mb-6 flex flex-wrap gap-4 items-center p-3">
                                 <button className="p-2 text-2xl" onClick={() => setSearchVisible(!searchVisible)}>
@@ -211,13 +283,39 @@ const Members = () => {
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-right">
                                                     <div className="flex justify-end space-x-2">
-                                                        <button className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full hover:bg-blue-50" title="View">
+                                                        <button className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full hover:bg-blue-50" title="View"
+                                                        onClick={()=>{
+                                                            setDownload(true);
+                                                            setSelectedMember(member)
+                                                            
+                                                            }
+                                                        
+                                                        
+                                                        }
+                                                       
+
+                                                        >
                                                             <FiEye />
                                                         </button>
-                                                        <button className="p-2 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50" title="Edit">
-                                                            <FiEdit2 />
+                                                        <button className="p-2 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50" title="Edit"
+                                                         onClick={() => handleEdit(member)}
+                                                        >
+                                                            <FaRegEdit />
                                                         </button>
-                                                        <button className="p-2 text-red-600 hover:text-red-800 rounded-full hover:bg-red-50" title="Delete">
+                                                        <button className="p-2 text-red-600 hover:text-red-800 rounded-full hover:bg-red-50" title="Delete"
+                                                        onClick={()=>{
+                                                             setMemberToDelete(member)
+                                                        setConfirmDelete(true)
+
+                                                        }
+                                                       
+
+
+                                                        
+                                                        }
+                                                        
+                                                        >
+
                                                             <FiTrash2 />
                                                         </button>
                                                     </div>
@@ -297,6 +395,135 @@ const Members = () => {
                     </div>
                 )
             }
+             {Download && selectedMember && (
+                                <div
+                                    className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
+                                    onClick={() => setDownload(false)}
+                                >
+                                    <div
+                                        className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <div id="book-details-pdf" className="mb-4">
+                                            <h2 className="text-xl font-semibold mb-2">
+                                            🧍 Name: {selectedMember.name}
+                                            </h2>
+                                            <p className="text-gray-700 mb-1">👨‍💻 career: {selectedMember.career}</p>
+                                            <p className="text-gray-700 mb-1">📞 Telephone: {selectedMember.tellephone}</p>
+                                            <p className="text-gray-500 text-sm">
+                                                🗓️ Added on: {new Date(selectedMember.created_at).toLocaleDateString()}
+                                            </p>
+                                        </div>
+                                        <div className="flex justify-end space-x-2">
+                                            <button
+                                                // onClick={handleDownload}
+                                                className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+                                            >
+                                                📥 Download PDF
+                                            </button>
+                                            <button
+                                                onClick={() => setDownload(false)}
+                                                className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+                                            >
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                             {IsEditing && (
+                                <div
+                                    className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
+                                    onClick={() => setEditing(false)}
+                                >
+                                    <div
+                                        className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        <h2 className="text-xl font-bold mb-4">Edit Member</h2>
+
+                                        <input
+                                            type="text"
+                                            value={MemberData.name}
+                                            onChange={(e) => setMemberData({ ...MemberData, name: e.target.value })}
+                                            placeholder="Book Name"
+                                            className="w-full mb-3 px-4 py-2 border rounded"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={MemberData.career}
+                                            onChange={(e) => setMemberData({ ...MemberData, career: e.target.value })}
+                                            placeholder="Book Type"
+                                            className="w-full mb-3 px-4 py-2 border rounded"
+                                        />
+                                        <input
+                                            type="text"
+                                            value={MemberData.tellephone}
+                                            onChange={(e) => setMemberData({ ...MemberData, tellephone: e.target.value })}
+                                            placeholder="Author Name"
+                                            className="w-full mb-3 px-4 py-2 border rounded"
+                                        />
+
+                                        <div className="flex justify-end space-x-2">
+                                            <button
+                                                onClick={HandleUpdate}
+                                                className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                            >
+                                                Save
+                                            </button>
+                                            <button
+                                                onClick={() => setEditing(false)}
+                                                className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                                            >
+                                                Cancel
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                                                       {confirmDelete && (
+                              <div className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50">
+                                <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+                                  <h3 className="text-xl font-bold text-gray-900 mb-4">Confirm Deletion</h3>
+                                  <p className="text-gray-600 mb-6">
+                                    Are you sure you want to delete "
+                                    {MemberDelete?.name || 'Untitled Book'}"? This action cannot be undone.
+                                  </p>
+                            
+                                  <div className="flex justify-end space-x-3">
+                                    <button
+                                      onClick={() => {
+                                        setConfirmDelete(false)
+                                        setMemberToDelete(null)
+                                      }}
+                                      disabled={isDeleting}
+                                      className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200"
+                                    >
+                                      Cancel
+                                    </button>
+                            
+                                    <button
+                                      onClick={handleDelete}
+                                      disabled={isDeleting}
+                                      className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 flex items-center"
+                                    >
+                                      {isDeleting ? (
+                                        <>
+                                          <FiLoader className="animate-spin mr-2" />
+                                          Deleting...
+                                        </>
+                                      ) : (
+                                        <>
+                                          <FiTrash2 className="mr-2" />
+                                          Delete
+                                        </>
+                                      )}
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
         </div>
     )
 }

@@ -90,7 +90,7 @@ export const deleteMember = async (id) => {
     .from('members')
     .delete()
     .eq('id', id)
-    .eq('members', user.id) 
+    .eq('member_id', user.id) 
 
   if (error) throw error
   return data

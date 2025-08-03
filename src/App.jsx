@@ -15,6 +15,8 @@ import  { Toaster } from 'react-hot-toast';
 import Books from "./pages/Books";
 import Members from "./pages/Members";
 import BookList from "./pages/BookList";
+import NotFound from "./pages/NotFound";
+import IssuePage from "./pages/IssuePage";
 
 function App() {
   return (
@@ -26,6 +28,9 @@ function App() {
           <Routes>
             {/* Public Routes */}
             <Route path="/" element={<HomePage />} />
+             <Route path="notFound" element={<NotFound />} />
+             <Route path="issue" element={<IssuePage />} />
+             
             <Route path="/signin" element={
               <UnAuthenticatedRoute>
                 <SignIn />
@@ -40,6 +45,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
+           
 
            
 
@@ -61,6 +67,8 @@ function App() {
             <Route path="Books" element={<Books />} />
             <Route path="memebers" element={<Members />} />
             <Route path="BookList" element={<BookList />} />
+           
+
               
             </Route>
           </Routes>

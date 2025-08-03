@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { FiEdit2, FiEye, FiLoader, FiPlus, FiTrash2 } from 'react-icons/fi'
+import { FaRegEdit } from "react-icons/fa";
 import { deleteBook, getMyBooks, updateBook } from '../lib/books'
 import { FaSearch } from 'react-icons/fa'
 import { html2pdf } from 'html2pdf.js'
 
 import { RiWifiOffLine } from 'react-icons/ri'
 import toast from 'react-hot-toast'
+import { Link } from 'react-router'
+import { IoReturnDownBackSharp } from 'react-icons/io5'
 
 
 
@@ -27,6 +30,8 @@ function BookList() {
    const [confirmDelete, setConfirmDelete] = useState(false)
 const [bookToDelete, setBookToDelete] = useState(null)
 const [isDeleting, setIsDeleting] = useState(false)
+
+
 const handleDelete = async () => {
   if (!bookToDelete) return
 
@@ -36,9 +41,9 @@ const handleDelete = async () => {
     setConfirmDelete(false)
     setBookToDelete(null)
     fetchBooks()
-    toast('successfully Deleted')
+    toast.success('successfully Deleted')
   } catch (err) {
-    alert("Failed to delete: " + err.message)
+    toast.error("Failed to delete: " + err.message)
   } finally {
     setIsDeleting(false)
   }
@@ -169,6 +174,14 @@ const handleDelete = async () => {
                         </div>
                     ) : (
                         <div className="bg-white rounded-xl overflow-hidden shadow-md max-w-7xl mx-auto mt-10 p-4 ">
+                         <Link
+                                       to="/dashboard/DashboardHome"
+                                       className="inline-flex items-center px-6 py-1 rounded-full bg-green-100 text-green-500 font-semibold  transition-colors duration-200 mb-4"
+                                     >
+                                      <IoReturnDownBackSharp  className="  p-2 text-5xl" />
+                                         Back to the Dashboard
+                                      
+                                     </Link> 
 
                             {/* Search Section */}
                             <div className="mb-6 flex flex-wrap gap-4 items-center">
@@ -197,6 +210,7 @@ const handleDelete = async () => {
 
                             {/* Responsive Table */}
                             <div className=" overflow-x-auto">
+                            
                                 <table className="min-w-full divide-y divide-gray-200">
                                     <thead className="bg-gray-50">
                                         <tr>
@@ -249,7 +263,7 @@ const handleDelete = async () => {
                                                             className="p-2 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50"
                                                             title="Edit Book"
                                                         >
-                                                            <FiEdit2 />
+                                                            <FaRegEdit />
                                                         </button>
                                                         <button
                                                             onClick={() => {
