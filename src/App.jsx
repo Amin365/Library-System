@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router";
 
-import Isuepage from "./pages/Isuepage";
+import Isuepage from "./pages/mainIssue";
 import DashboardHome from "./pages/DashboardHome";
 import DashboardLayout from "./pages/DashboardLayout";
 import Header from "./components/Header";
@@ -17,6 +17,7 @@ import Members from "./pages/Members";
 import BookList from "./pages/BookList";
 import NotFound from "./pages/NotFound";
 import IssuePage from "./pages/IssuePage";
+import MainIssue from "./pages/mainIssue";
 
 function App() {
   return (
@@ -58,7 +59,7 @@ function App() {
               
               }>
               <Route path="dashboardhome" element={<DashboardHome />} />
-              <Route path="issuepage" element={<Isuepage />} />
+              
                <Route path="signup" element={
 
                 <SignUp />
@@ -67,6 +68,7 @@ function App() {
             <Route path="Books" element={<Books />} />
             <Route path="memebers" element={<Members />} />
             <Route path="BookList" element={<BookList />} />
+            <Route path="mainissue" element={<MainIssue />} />
            
 
               

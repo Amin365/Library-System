@@ -130,6 +130,8 @@ const HandleUpdate=async()=>{
         
        
     }, [user])
+
+    
      useEffect(() => {
         const handleOnline = () => {
             setIsOnline(true)

@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
 import { IoMdClose } from "react-icons/io";
+import { createIsue } from '../lib/issue';
+import { useNavigate } from 'react-router';
+import toast from 'react-hot-toast';
+import { MdOutlineNotificationImportant } from 'react-icons/md';
+
 
 const IssuePage = () => {
     const[name,setname]=useState('')
@@ -7,25 +12,49 @@ const IssuePage = () => {
     const[tell,settell]=useState('')
     const[returnData,setretunData]=useState('')
     const[cancelbtn,setcancelbtn]=useState(true)
-
-
      const [isLoading, setIsLoading] = useState(false)
       const [error, setError] = useState(null)
       const [success, setSuccess] = useState(false)
+      const navigate =useNavigate()
+
+      const handleSumbit= async(e)=>{
+        e.preventDefault()
+        setIsLoading(true)
+        setError(null)
+        try {
+            await createIsue({name,Bookname,returnData,tell})
+            setSuccess(true)
+            setTimeout(() => {
+                navigate('/')
+
+                
+            }, 3000);
+            
+        } catch (error) {
+            
+      toast.error("Failed to add book. Please try again",error)
+            
+        }finally{
+            setIsLoading(false)
+        }
+      }
+
+
 
      if (success) {
     return (
       <div className="min-h-screen flex items-center justify-center  px-4">
         <div className="max-w-md w-full text-center">
           <div className="bg-white rounded-lg shadow-md p-8">
-            <div className="text-green-500 text-5xl mb-4">✓</div>
-            <h2 className="text-2xl font-bold mb-2">Account Created!</h2>
-            <p className="text-gray-600 mb-4">
-              Your account has been created successfully. Please check your email for verification.
+            <div className="text-green-500 text-7xl mb-4">✓</div>
+            <h2 className="text-2xl font-bold mb-4">Form submitted successfully!</h2>
+            <p className="text-gray-600 mb-4 text-base">
+              🎉 Thank you! Your request has been
+               successfully submitted. Our team is reviewing your 
+               details and will get in touch with you within 24 hours. 
+               In the meantime, feel free to browse more books or contact us if you have any questions.
             </p>
-            <p className="text-gray-500 text-sm">
-              Redirecting to sign in page in a few seconds...
-            </p>
+            
           </div>
         </div>
       </div>
@@ -33,20 +62,21 @@ const IssuePage = () => {
   }
   return (
      <div className='min-h-screen flex items-center justify-center  px-8'>
-          <div className='max-w-md w-full'>
+          <div className='max-w-xl md:max-w-md w-full'>
             {/* title and subtitle */}
             <div className='text-center mb-16'>
               <h1 className='text-3xl font-bold'>📚 Get the Book You Need.</h1>
               <p className='text-gray-600 mt-2'>Fill in the form and submit your request</p>
             </div>
             {/* form info */}
-            <div className="bg-white rounded-lg shadow-md p-4">
+            <div className="bg-white rounded-lg shadow-md  md:px-2 py-6 px-1">
 
             {
                 cancelbtn&&(
-                    <div className='mb-6 relative p-4 bg-green-100 text-green-500 rounded-lg '>
-                <h1>After submitting this form we will contact you in 24hrs</h1>
-                <div className='absolute top-0 right-1 text-xl font-bold mb-1'
+                    <div className='mb-6 relative p-4 bg-green-100 text-green-500 rounded-lg flex items-center gap-2 '>
+                    {<MdOutlineNotificationImportant className='md:text-xl'/>}
+                <h1 className='text-sm font-bold '>After submitting this form we will contact you in 24hrs</h1>
+                <div className='absolute top-0 right-1 text-xl font-bold mb-2'
                 onClick={()=>setcancelbtn(!cancelbtn)}
                 
                 >
@@ -61,7 +91,7 @@ const IssuePage = () => {
     
            
     
-              <form >
+              <form onSubmit={handleSumbit} >
     
                 <div className="mb-6">
                   <label className="block text-gray-700 text-sm font-semibold mb-2" htmlFor="email">

@@ -3,6 +3,7 @@ import logos from '../assets/reading.png'
 import { FiArrowRight } from 'react-icons/fi'
 import { SiBookstack } from "react-icons/si";
 import { CiFacebook } from "react-icons/ci";
+import { MdOutlineNotificationImportant } from "react-icons/md";
 
 
 const HomePage = () => {

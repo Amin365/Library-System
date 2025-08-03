@@ -13,7 +13,7 @@ function DashboardLayout() {
 
     { to: "/dashboard/Books", label: "ADD BOOKS", icon: <MdLibraryBooks size={22} /> },
     { to: "/dashboard/BookList", label: "TOTAL BOOKS", icon: <MdLibraryBooks size={22} /> },
-    { to: "/dashboard/issuepage", label: "ISSUE BOOKS", icon: <FaBookOpen size={22} /> },
+    { to: "/dashboard/mainissue", label: "ISSUE BOOKS", icon: <FaBookOpen size={22} /> },
     { to: "/dashboard/memebers", label: "MEMBERS", icon: <MdPeople size={22} /> },
     { to: "/dashboard/signup", label: "ADD ADMIN", icon: <MdPersonAdd size={22} /> },
   ];
