@@ -3,7 +3,7 @@ import { FaSearch } from 'react-icons/fa';
 import { FiEye } from 'react-icons/fi';
 import { IoReturnDownBackSharp } from 'react-icons/io5';
 import { RiWifiOffLine } from 'react-icons/ri';
-import { getAllIssues, getMyIssue } from '../lib/issue';
+import { getAllIssues, } from '../lib/issue';
 import { Link } from 'react-router';
 
 const MainIssue = () => {

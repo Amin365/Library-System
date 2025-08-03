@@ -19,6 +19,7 @@ import { FiEdit2, FiEye, FiLoader, FiTrash2 } from "react-icons/fi";
 import { FaRegEdit } from "react-icons/fa";
 import { GrView } from "react-icons/gr";
 import { Link } from "react-router";
+import { getAllIssues } from "../lib/issue";
 function DashboardHome() {
   const [books, setBooks] = useState([])
   const [member, setMember] = useState([])
@@ -34,10 +35,18 @@ function DashboardHome() {
           career:'',
           tellephone:''
       })
+      const[issue,setIssue]=useState([])
         const [confirmDelete, setConfirmDelete] = useState(false)
           const [MemberDelete, setMemberToDelete] = useState(null)
           const [isDeleting, setIsDeleting] = useState(false)
-          
+          const FetchIssue = async()=>{
+            const data=await getAllIssues()
+            setIssue(data)
+          }
+
+          useEffect(()=>{
+            FetchIssue()
+          },[])
           const handleDelete = async () => {
             if (!MemberDelete) return
           
@@ -82,7 +91,7 @@ function DashboardHome() {
   const chartData = {
     Today: [
       { name: "New Book", value: books.length },
-      { name: "Issued", value: books.length - 1 },
+      { name: "Issued", value: issue.length - 1 },
       { name: "New Member", value: member.length },
       { name: "Not Returned", value: 2 },
     ],
@@ -226,7 +235,7 @@ function DashboardHome() {
                       </div>
                       <div>
                         <h3 className="text-2xl text-gray-900 mb-2">Total Issue </h3>
-                        <h1 className="text-center text-1xl font-bold">  {books.length}</h1>
+                        <h1 className="text-center text-1xl font-bold">  {issue.length}</h1>
                       </div>
                     </div>
                   </div>
