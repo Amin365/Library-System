@@ -131,7 +131,7 @@ const HandleUpdate=async()=>{
        
     }, [user])
 
-    
+
      useEffect(() => {
         const handleOnline = () => {
             setIsOnline(true)
@@ -345,7 +345,7 @@ const HandleUpdate=async()=>{
                         >
                             <div className="text-center mb-6">
                                 <h1 className="text-2xl font-bold">Add Member</h1>
-                                <p className="text-gray-600 mt-2">Join our community and start sharing your ideas</p>
+                                <p className="text-gray-600 mt-2">Register a new library member by filling in their details below.</p>
                             </div>
 
                             <form onSubmit={handlesumbit}>
