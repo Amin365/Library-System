@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { RiWifiOffLine } from "react-icons/ri";
 import { deleteMember, getMembers, updateMember } from "../lib/member";
-import { getMyBooks } from "../lib/books";
+import { deleteBook, getMyBooks, updateBook } from "../lib/books";
 import { IoBookOutline } from "react-icons/io5";
 import { IoPeopleSharp } from "react-icons/io5";
 import { useAuth } from "../context/AuthContext";
@@ -29,16 +29,28 @@ function DashboardHome() {
   const [activeTab, setActiveTab] = useState("Today");
      const[Download,setDownload]=useState(false)
       const[selectedMember,setSelectedMember]=useState(null)
-      const[IsEditing,setEditing]=useState(false)
+      const[IsEditingBook,setEditingBook]=useState(false)
+      const[IsEditingmember,setEditingMember]=useState(false)
       const[MemberData,setMemberData]=useState({
           name:'',
           career:'',
           tellephone:''
       })
       const[issue,setIssue]=useState([])
-        const [confirmDelete, setConfirmDelete] = useState(false)
+        const [confirmDeleteBook, setConfirmDeleteBook] = useState(false)
+        const [confirmDeleteMember, setConfirmDeleteMember] = useState(false)
           const [MemberDelete, setMemberToDelete] = useState(null)
           const [isDeleting, setIsDeleting] = useState(false)
+
+        
+       const [selectedBook, setSelectedBook] = useState(null)  
+       const [bookToDelete, setBookToDelete] = useState(null)
+         const [EditBookData, setBookEdit] = useState({
+               name: "",
+               type: "",
+               author: ""
+           })
+
           const FetchIssue = async()=>{
             const data=await getAllIssues()
             setIssue(data)
@@ -53,7 +65,7 @@ function DashboardHome() {
             setIsDeleting(true)
             try {
               await deleteMember(MemberDelete.id)
-              setConfirmDelete(false)
+              setConfirmDeleteMember(false)
               setMemberToDelete(null)
               fetchMembers()
               toast.success('successfully Deleted')
@@ -71,12 +83,12 @@ function DashboardHome() {
                   tellephone:member.tellephone
               })
               setSelectedMember(member)
-              setEditing(true)
+              setEditingMember(true)
           }
       const HandleUpdate=async()=>{
           try {
               await updateMember(selectedMember.id,MemberData)
-              setEditing(false)
+              setEditingMember(false)
               fetchMembers()
                 toast.success("SuccessFully Updated")
               
@@ -85,6 +97,46 @@ function DashboardHome() {
               
           }
       }
+const HandleDeleteBook = async () => {
+  if (!bookToDelete) return
+
+  setIsDeleting(true)
+  try {
+    await deleteBook(bookToDelete.id)
+    setConfirmDelete(false)
+    setBookToDelete(null)
+    fetchBooks()
+    toast.success('successfully Deleted')
+  } catch (err) {
+    toast.error("Failed to delete: " + err.message)
+  } finally {
+    setIsDeleting(false)
+  }
+}
+   
+const HandleEditBook = (book) => {
+        setBookEdit({
+            name: book.name,
+            type: book.type,
+            author: book.authar_name
+
+        })
+        setSelectedBook(book)
+        setEditingBook(true)
+    }
+
+
+    const HandleUpdateBook = async () => {
+        try {
+            await updateBook(selectedBook.id, EditBookData)
+            setEditingBook(false)
+            fetchBooks()
+            toast("SuccessFully Updated")
+        } catch (error) {
+            toast("Failed to update book: " + err.message)
+        }
+    }
+
 
 
   const { profile } = useAuth()
@@ -403,27 +455,27 @@ function DashboardHome() {
                        <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="flex justify-end space-x-2">
                           <button
-                            // onClick={() => {
-                            //     setSelectedBook(m);
-                            //     setDownload(true);
-                            // }}
+                            onClick={() => {
+                                setSelectedBook(m);
+                                setDownload(true);
+                            }}
                             className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full hover:bg-blue-50"
                             title="View Book"
                           >
                             <FiEye />
                           </button>
                           <button
-                            // onClick={() => handleEdit(m)}
+                            onClick={() => HandleEditBook(m)}
                             className="p-2 text-green-600 hover:text-green-800 rounded-full hover:bg-green-50"
                             title="Edit Book"
                           >
                             <FaRegEdit />
                           </button>
                           <button
-                            // onClick={() => {
-                            //     setBookToDelete(m)
-                            //     setConfirmDelete(true)
-                            // }}
+                            onClick={() => {
+                                setBookToDelete(m)
+                                setConfirmDelete(true)
+                            }}
                             className="p-2 text-red-600 hover:text-red-800 rounded-full hover:bg-red-50 cursor-pointer"
                             title="Delete Book"
                           >
@@ -495,10 +547,10 @@ function DashboardHome() {
                                     </div>
                                 </div>
                             )}
-                             {IsEditing && (
+                             {IsEditingmember && (
                                 <div
                                     className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
-                                    onClick={() => setEditing(false)}
+                                    onClick={() => setEditingMember(false)}
                                 >
                                     <div
                                         className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
@@ -536,7 +588,7 @@ function DashboardHome() {
                                                 Save
                                             </button>
                                             <button
-                                                onClick={() => setEditing(false)}
+                                                onClick={() => setEditingMember(false)}
                                                 className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
                                             >
                                                 Cancel
@@ -546,7 +598,7 @@ function DashboardHome() {
                                 </div>
                             )}
 
-                                                       {confirmDelete && (
+                                                       {confirmDeleteMember && (
                               <div className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50">
                                 <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
                                   <h3 className="text-xl font-bold text-gray-900 mb-4">Confirm Deletion</h3>
@@ -588,6 +640,137 @@ function DashboardHome() {
                                 </div>
                               </div>
                             )}
+
+                             {Download && selectedBook && (
+                                                          <div
+                                                              className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
+                                                              onClick={() => setDownload(false)}
+                                                          >
+                                                              <div
+                                                                  className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+                                                                  onClick={(e) => e.stopPropagation()}
+                                                              >
+                                                                  <div id="book-details-pdf" className="mb-4">
+                                                                      <h2 className="text-xl font-semibold mb-2">
+                                                                          📘 Book Name: {selectedBook.name}
+                                                                      </h2>
+                                                                      <p className="text-gray-700 mb-1">📚 Type: {selectedBook.Type}</p>
+                                                                      <p className="text-gray-700 mb-1">✍️ Author: {selectedBook.authar_name}</p>
+                                                                      <p className="text-gray-500 text-sm">
+                                                                          🗓️ Added on: {new Date(selectedBook.created_at).toLocaleDateString()}
+                                                                      </p>
+                                                                  </div>
+                                                                  <div className="flex justify-end space-x-2">
+                                                                      <button
+                                                                          // onClick={handleDownload}
+                                                                          className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+                                                                      >
+                                                                          📥 Download PDF
+                                                                      </button>
+                                                                      <button
+                                                                          onClick={() => setDownload(false)}
+                                                                          className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+                                                                      >
+                                                                          Close
+                                                                      </button>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      )}
+                                                      {IsEditingBook && (
+                                                          <div
+                                                              className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
+                                                              onClick={() => setEditingBook(false)}
+                                                          >
+                                                              <div
+                                                                  className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+                                                                  onClick={(e) => e.stopPropagation()}
+                                                              >
+                                                                  <h2 className="text-xl font-bold mb-4">Edit Book</h2>
+                          
+                                                                  <input
+                                                                      type="text"
+                                                                      value={EditBookData.name}
+                                                                      onChange={(e) => setBookEdit({ ...EditBookData, name: e.target.value })}
+                                                                      placeholder="Book Name"
+                                                                      className="w-full mb-3 px-4 py-2 border rounded"
+                                                                  />
+                                                                  <input
+                                                                      type="text"
+                                                                      value={EditBookData.type}
+                                                                      onChange={(e) => setBookEdit({ ...EditBookData, type: e.target.value })}
+                                                                      placeholder="Book Type"
+                                                                      className="w-full mb-3 px-4 py-2 border rounded"
+                                                                  />
+                                                                  <input
+                                                                      type="text"
+                                                                      value={EditBookData.author}
+                                                                      onChange={(e) => setBookEdit({ ...EditBookData, author: e.target.value })}
+                                                                      placeholder="Author Name"
+                                                                      className="w-full mb-3 px-4 py-2 border rounded"
+                                                                  />
+                          
+                                                                  <div className="flex justify-end space-x-2">
+                                                                      <button
+                                                                          onClick={HandleUpdateBook}
+                                                                          className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                                                                      >
+                                                                          Save
+                                                                      </button>
+                                                                      <button
+                                                                          onClick={() => setEditingBook(false)}
+                                                                          className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700"
+                                                                      >
+                                                                          Cancel
+                                                                      </button>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      )}
+                                                      {confirmDeleteBook && (
+                            <div className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50">
+                              <div className="bg-white rounded-xl shadow-xl max-w-md w-full p-6">
+                                <h3 className="text-xl font-bold text-gray-900 mb-4">Confirm Deletion</h3>
+                                <p className="text-gray-600 mb-6">
+                                  Are you sure you want to delete "
+                                  {bookToDelete?.name || 'Untitled Book'}"? This action cannot be undone.
+                                </p>
+                          
+                                <div className="flex justify-end space-x-3">
+                                  <button
+                                    onClick={() => {
+                                      setConfirmDeleteBook(false)
+                                      setBookToDelete(null)
+                                    }}
+                                    disabled={isDeleting}
+                                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-200"
+                                  >
+                                    Cancel
+                                  </button>
+                          
+                                  <button
+                                    onClick={HandleDeleteBook}
+                                    disabled={isDeleting}
+                                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 flex items-center"
+                                  >
+                                    {isDeleting ? (
+                                      <>
+                                        <FiLoader className="animate-spin mr-2" />
+                                        Deleting...
+                                      </>
+                                    ) : (
+                                      <>
+                                        <FiTrash2 className="mr-2" />
+                                        Delete
+                                      </>
+                                    )}
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          )}  
+
+
 
     </>
 

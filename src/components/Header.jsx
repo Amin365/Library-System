@@ -5,7 +5,7 @@ import { IoMdClose } from 'react-icons/io'
 import { MdLogout } from 'react-icons/md'
 import { RxDashboard } from 'react-icons/rx'
 import { SiBookstack } from 'react-icons/si'
-import { Link } from 'react-router'
+import { Link, NavLink } from 'react-router'
 import { useAuth } from '../context/AuthContext'
 
 
@@ -27,10 +27,29 @@ const Header = () => {
                                 className='text-2xl font-bold text-green-600'
                             >AMB</Link>
                         </div>
-                        <nav className='items-center flex ml-8 space-x-4'>
-                            <Link to={'/'} className='inline-flex items-center px-1 pt-1 border-b-2 border-green-500 text-base font-medium text-gray-900 capitalize pointer-curser'>Home</Link>
-                            <Link to={'/dashboard/dashboardhome'} className='inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-base font-medium text-gray-900 capitalize'>dashboard</Link>
-                        </nav>
+                      <nav className="items-center flex ml-8 space-x-4">
+  <NavLink
+    to="/"
+    className={({ isActive }) =>
+      `inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium capitalize ${
+        isActive ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-600'
+      }`
+    }
+  >
+    Home
+  </NavLink>
+
+  <NavLink
+    to="/dashboard/dashboardhome"
+    className={({ isActive }) =>
+      `inline-flex items-center px-1 pt-1 border-b-2 text-base font-medium capitalize ${
+        isActive ? 'border-green-500 text-gray-900' : 'border-transparent text-gray-600'
+      }`
+    }
+  >
+    Dashboard
+  </NavLink>
+</nav>
                     </div>
 
                      <div className='flex items-center space-x-1'>
