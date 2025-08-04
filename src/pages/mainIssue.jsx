@@ -88,9 +88,11 @@ const MainIssue = () => {
                             <div className="ml-4 sm:px-6 lg:px-8 mb-4">
                                 <div className="flex flex-col md:flex-row justify-around items-center mb-16">
                                     <div className=''>
-                                        <h1 className="md:text-4xl text-2xl font-bold   mb-4">Manage Your Members</h1>
+                                        <h1 className="md:text-4xl text-2xl font-bold   mb-4"> Book Issue Management</h1>
                                         <p className="text-black mb-4 text-center">
-                                            Create, edit, and manage your Members
+                                           Easily manage issued books and track return dates. View who borrowed each book and stay organized.
+
+
                                         </p>
                                     </div>
                                    
