@@ -105,8 +105,7 @@ VITE_SUPABASE_ANON_KEY=your-anon-key
 ---
 
 ## 📸 Screenshots
-C:\Users\MOHAMED BASHIIR\Desktop\dugsiiyementorship\reactjslessons\reactfinalproject\src\assets\Screenshot (79).png
-
+![](<src/assets/Screenshot (79).png>)
 
 
 ---
