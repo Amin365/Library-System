@@ -230,9 +230,14 @@ const HandleEditBook = (book) => {
       <div className=" mx-auto max-w-9xl  mt-10  ">
         {
           isLoading ? (
-            <div className="flex justify-center items-center py-20">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-700"></div>
-            </div>
+                <div className="w-full flex justify-center">
+      <div className="w-7xl p-4 bg-white rounded-md shadow animate-pulse">
+        <div className="h-4 bg-gray-300 rounded w-3/4 mb-3"></div>
+        <div className="h-4 bg-gray-300 rounded w-1/2 mb-3"></div>
+        <div className="h-4 bg-gray-300 rounded w-full mb-3"></div>
+        <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+      </div>
+    </div>
           ) : !isOnline ? (
             <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
               <RiWifiOffLine className="mx-auto h-12 w-12 text-red-500 mb-4" />
