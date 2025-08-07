@@ -181,7 +181,7 @@ const HandleEditBook = (book) => {
   useEffect(() => {
     const handleOnline = () => {
       setIsOnline(true)
-      fetchBooks() // try again when back online
+      fetchBooks() 
     }
     const handleOffline = () => {
       setIsOnline(false)

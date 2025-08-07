@@ -139,13 +139,19 @@ const handleDelete = async () => {
         <div>
             {
                 isLoading ? (
-                      <div className="w-full flex justify-center">
-      <div className="w-7xl p-4 bg-white rounded-md shadow animate-pulse">
-        <div className="h-4 bg-gray-300 rounded w-3/4 mb-3"></div>
-        <div className="h-4 bg-gray-300 rounded w-1/2 mb-3"></div>
-        <div className="h-4 bg-gray-300 rounded w-full mb-3"></div>
-        <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-      </div>
+                <div className="p-16 mt-20 w-full mx-auto bg-white rounded-md shadow animate-pulse">
+      <div className="h-3 bg-gray-300 rounded w-3/4 mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-1/2 mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-full mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-2/3"></div>
+      <div className="h-3 bg-gray-300 rounded w-3/4 mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-1/2 mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-full mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-2/3"></div>
+      <div className="h-3 bg-gray-300 rounded w-3/4 mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-1/2 mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-full mb-4"></div>
+      <div className="h-3 bg-gray-300 rounded w-2/3"></div>
     </div>
                 ) :
                     !isOnline ? (
