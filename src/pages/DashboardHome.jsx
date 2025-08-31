@@ -373,7 +373,7 @@ const HandleEditBook = (book) => {
           {/* 🧾 Recent Activity */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             {/* ✅ New Members */}
-            <div className="bg-white p-6 rounded-lg shadow-md max-w-7xl mx-auto w-full">
+            <div className="bg-white p-6 rounded-lg shadow-md max-w-7xl mx-auto w-full overflow-x-auto">
               <h3 className="text-lg font-semibold mb-4 text-green-500 bg-green-100 rounded-lg inline px-2 py-3 ">New Members</h3>
               <table className="w-full text-sm text-left text-gray-700 divide-y divide-gray-500 mt-6">
                 <thead className="bg-gray-50">
@@ -439,8 +439,8 @@ const HandleEditBook = (book) => {
 
               </div>
             </div>
-            <div className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-lg font-semibold mb-4 text-green-500 bg-green-100 rounded-lg inline px-2 py-3 mb-4">New Books</h3>
+            <div className="bg-white p-6 rounded-lg shadow-md overflow-x-auto">
+              <h3 className="text-lg font-semibold mb-4 text-green-500 bg-green-100 rounded-lg inline px-2 py-3 ">New Books</h3>
               <table className="w-full text-sm text-left text-gray-700 divide-y divide-gray-500 mt-6">
                 <thead className="bg-gray-50">
                   <tr>
