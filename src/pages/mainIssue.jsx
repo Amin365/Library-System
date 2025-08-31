@@ -7,133 +7,149 @@ import { getAllIssues, } from '../lib/issue';
 import { Link } from 'react-router';
 
 const MainIssue = () => {
-  const[Issue,setIssue]=useState([])
-  const [searchTerm, setSearchTerm] = useState("")
-      const [searchVisible, setSearchVisible] = useState(false)
-      const [isOnline, setIsOnline] = useState(navigator.onLine)
-      const[Download,setDownload]=useState(false)
-        const [isLoading, setIsLoading] = useState(false)
-          const [error, setError] = useState(null)
-          const[Selectedissue,setSelectedissue] =useState(null)
+    const [Issue, setIssue] = useState([])
+    const [searchTerm, setSearchTerm] = useState("")
+    const [searchVisible, setSearchVisible] = useState(false)
+    const [isOnline, setIsOnline] = useState(navigator.onLine)
+    const [Download, setDownload] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const [Selectedissue, setSelectedissue] = useState(null)
 
-      
+
     const filteredIssue = Issue.filter((issue) =>
         issue.name.toLowerCase().includes(searchTerm.toLowerCase()))
 
-    const FetchIssue =async()=>{
-      try {
-        setIsLoading(true)
+    const FetchIssue = async () => {
+        try {
+            setIsLoading(true)
 
-        const data =await getAllIssues()
-        setIssue(data)
-        
-      } catch (error) {
-        setError(error.message)
-        
-      }finally{
-        setIsLoading(false)
-      }
+            const data = await getAllIssues()
+            setIssue(data)
+
+        } catch (error) {
+            setError(error.message)
+
+        } finally {
+            setIsLoading(false)
+        }
 
     }
-     useEffect(()=>{
-      FetchIssue()
+    useEffect(() => {
+        FetchIssue()
 
-     },[])
+    }, [])
 
-      
-   
 
-      useEffect(() => {
-            const handleOnline = () => {
-                setIsOnline(true)
-                FetchIssue() 
-            }
-            const handleOffline = () => {
-                setIsOnline(false)
-            }
-    
-            window.addEventListener('online', handleOnline)
-            window.addEventListener('offline', handleOffline)
-    
-            return () => {
-                window.removeEventListener('online', handleOnline)
-                window.removeEventListener('offline', handleOffline)
-            }
-        }, [])
-    
-  return (
-      <div className="max-w-7xl mx-auto py-6">
-                {
-                    isLoading ? (
-              <div className="p-16 mt-20 w-full mx-auto bg-white rounded-md shadow animate-pulse">
-      <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-full mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-      <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-full mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-      <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-full mb-4"></div>
-      <div className="h-4 bg-gray-300 rounded w-2/3"></div>
-    </div>
-                    ) : !isOnline ?(
+
+
+    useEffect(() => {
+        const handleOnline = () => {
+            setIsOnline(true)
+            FetchIssue()
+        }
+        const handleOffline = () => {
+            setIsOnline(false)
+        }
+
+        window.addEventListener('online', handleOnline)
+        window.addEventListener('offline', handleOffline)
+
+        return () => {
+            window.removeEventListener('online', handleOnline)
+            window.removeEventListener('offline', handleOffline)
+        }
+    }, [])
+
+    const formatDate = (dateString) => {
+        if (!dateString) return null;
+        return new Date(dateString).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+        });
+    };
+
+    const isOverdue = (dueDate) => {
+        if (!dueDate) return false;
+        return new Date(dueDate) < new Date();
+    };
+
+
+
+    return (
+        <div className="max-w-7xl mx-auto py-6">
+            {
+                isLoading ? (
+                    <div className="p-16 mt-20 w-full mx-auto bg-white rounded-md shadow animate-pulse">
+                        <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-full mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                        <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-full mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                        <div className="h-4 bg-gray-300 rounded w-3/4 mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-1/2 mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-full mb-4"></div>
+                        <div className="h-4 bg-gray-300 rounded w-2/3"></div>
+                    </div>
+                ) : !isOnline ? (
                     <div className="bg-red-50 border border-red-200 rounded-xl p-6 text-center">
-                            <RiWifiOffLine className="mx-auto h-12 w-12 text-red-500 mb-4"  />
-                            <h3 className="text-lg font-medium text-red-800 mb-2">  You are offline. Please check your internet connection.</h3>
-                            <button
-                               
-                                className="mt-4 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors duration-200"
-                            >
-                                Try Again
-                            </button>
-                        </div>
-                    
-                    ):
-                    
-                    
-                      (
+                        <RiWifiOffLine className="mx-auto h-12 w-12 text-red-500 mb-4" />
+                        <h3 className="text-lg font-medium text-red-800 mb-2">  You are offline. Please check your internet connection.</h3>
+                        <button
+
+                            className="mt-4 px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors duration-200"
+                        >
+                            Try Again
+                        </button>
+                    </div>
+
+                ) :
+
+
+                    (
                         <div>
                             <div className="ml-4 sm:px-6 lg:px-8 mb-4">
                                 <div className="flex flex-col md:flex-row justify-around items-center mb-16">
                                     <div className=''>
                                         <h1 className="md:text-4xl text-2xl font-bold   mb-4"> Book Issue Management</h1>
                                         <p className="text-black mb-4 text-center">
-                                           Easily manage issued books and track return dates. View who borrowed each book and stay organized.
+                                            Easily manage issued books and track return dates. View who borrowed each book and stay organized.
 
 
                                         </p>
                                     </div>
-                                   
+
                                 </div>
                             </div>
-    
+
                             <div className="bg-white rounded-xl overflow-hidden shadow-md p-4">
-                            <Link
-                   to="/dashboard/DashboardHome"
-                   className="inline-flex items-center px-6 py-1 rounded-full bg-green-100 text-green-500 font-semibold  transition-colors duration-200 mb-4"
-                 >
-                  <IoReturnDownBackSharp  className="  p-2 text-5xl" />
-                     Back to the Dashboard
-                  
-                 </Link>
-                          
-                            
-                          
-                           
-    
-                           
-                           
-    
-                            
-    
+                                <Link
+                                    to="/dashboard/DashboardHome"
+                                    className="inline-flex items-center px-6 py-1 rounded-full bg-green-100 text-green-500 font-semibold  transition-colors duration-200 mb-4"
+                                >
+                                    <IoReturnDownBackSharp className="  p-2 text-5xl" />
+                                    Back to the Dashboard
+
+                                </Link>
+
+
+
+
+
+
+
+
+
+
                                 <div className="mb-6 flex flex-wrap gap-4 items-center p-3">
                                     <button className="p-2 text-2xl" onClick={() => setSearchVisible(!searchVisible)}>
                                         <FaSearch className="text-green-500 text-3xl" />
                                     </button>
-    
+
                                     {searchVisible && (
                                         <input
                                             type="search"
@@ -145,12 +161,12 @@ const MainIssue = () => {
                                     )}
                                 </div>
                                 <div className="mb-3 px-3 py-2 flex items-center gap-2">
-                    <span className="font-bold">Total Issue</span>
-                    <span className="px-2.5 py-0.5 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-                        {Issue.length}
-                    </span>
-                </div>
-    
+                                    <span className="font-bold">Total Issue</span>
+                                    <span className="px-2.5 py-0.5 bg-green-100 text-green-800 text-sm font-medium rounded-full">
+                                        {Issue.length}
+                                    </span>
+                                </div>
+
                                 <div className="overflow-y-auto">
                                     <table className="min-w-full divide-y divide-gray-200">
                                         <thead className="bg-gray-50">
@@ -160,6 +176,12 @@ const MainIssue = () => {
                                                 <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Tellephone</th>
                                                 <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Created Date</th>
                                                 <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Returned Date</th>
+                                                <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Status
+                                                </th>
+
+
+
                                             </tr>
                                         </thead>
                                         <tbody className="bg-white divide-y divide-gray-200">
@@ -171,26 +193,40 @@ const MainIssue = () => {
                                                     <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
                                                         {new Date(issue.created_at).toLocaleDateString()}
                                                     </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-center text-sm text-gray-500">
-                                                        {new Date(issue.return_data).toLocaleDateString()}
+                                                    <td className={`px-6 py-4 whitespace-nowrap text-center text-sm 
+                                                 ${isOverdue(issue.return_data) ? "text-red-500 font-bold" : "text-gray-500"}`}>
+                                                        {formatDate(issue.return_data)}
                                                     </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-center text-sm">
+                                                        {isOverdue(issue.return_data) ? (
+                                                            <span className="px-2.5 py-0.5 bg-red-100 text-red-600 font-semibold rounded-full">
+                                                                ❌ Failed - Due Date Passed
+                                                            </span>
+                                                        ) : (
+                                                            <span className="px-2.5 py-0.5 bg-green-100 text-green-600 font-semibold rounded-full">
+                                                                ✅ On Time
+                                                            </span>
+                                                        )}
+                                                    </td>
+
+
                                                     <td className="px-6 py-4 whitespace-nowrap text-right">
                                                         <div className="flex justify-end space-x-2">
                                                             <button className="p-2 text-indigo-600 hover:text-indigo-800 rounded-full hover:bg-blue-50" title="View"
-                                                            onClick={()=>{
-                                                                setDownload(true);
-                                                                setSelectedissue(issue)
-                                                                
+                                                                onClick={() => {
+                                                                    setDownload(true);
+                                                                    setSelectedissue(issue)
+
                                                                 }
-                                                            
-                                                            
-                                                            }
-                                                           
-    
+
+
+                                                                }
+
+
                                                             >
                                                                 <FiEye />
                                                             </button>
-                                                           
+
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -201,53 +237,57 @@ const MainIssue = () => {
                             </div>
                         </div>
                     )
-                }
-    
-                {/* ✅ Modal is always available when Addmember is true */}
-               
-                 {Download && Selectedissue && (
-                                    <div
-                                        className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
-                                        onClick={() => setDownload(false)}
-                                    >
-                                        <div
-                                            className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
-                                            onClick={(e) => e.stopPropagation()}
-                                        >
-                                            <div id="book-details-pdf" className="mb-4">
-                                                <h2 className="text-xl font-semibold mb-2">
-                                                🧍 Name: {Selectedissue.name}
-                                                </h2>
-                                                <p className="text-gray-700 mb-1">👨‍💻 career: {Selectedissue.book_name}</p>
-                                                <p className="text-gray-700 mb-1">📞 Telephone: {Selectedissue.tellephone}</p>
-                                                <p className="text-gray-500 text-sm">
-                                                    🗓️ Added on: {new Date(Selectedissue.created_at).toLocaleDateString()}
-                                                </p>
-                                                <p className="text-gray-500 text-sm">
-                                                    🗓️ Return Date : {new Date(Selectedissue.return_data).toLocaleDateString()}
-                                                </p>
-                                            </div>
-                                            <div className="flex justify-end space-x-2">
-                                                <button
-                                                    // onClick={handleDownload}
-                                                    className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
-                                                >
-                                                    📥 Download PDF
-                                                </button>
-                                                <button
-                                                    onClick={() => setDownload(false)}
-                                                    className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
-                                                >
-                                                    Close
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                               
-    
-            </div>
-  )
+            }
+
+            {/* ✅ Modal is always available when Addmember is true */}
+
+            {Download && Selectedissue && (
+                <div
+                    className="fixed inset-0 bg-[rgba(0,0,0,0.6)] flex items-center justify-center p-4 z-50"
+                    onClick={() => setDownload(false)}
+                >
+                    <div
+                        className="bg-white rounded-xl shadow-xl max-w-md w-full p-6"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <div id="book-details-pdf" className="mb-4">
+                            <h2 className="text-xl font-semibold mb-2">
+                                🧍 Name: {Selectedissue.name}
+                            </h2>
+                            <p className="text-gray-700 mb-1">👨‍💻 career: {Selectedissue.book_name}</p>
+                            <p className="text-gray-700 mb-1">📞 Telephone: {Selectedissue.tellephone}</p>
+                            <p className="text-gray-500 text-sm">
+                                🗓️ Added on: {new Date(Selectedissue.created_at).toLocaleDateString()}
+                            </p>
+                            <p className={`mt-2 text-sm font-semibold ${isOverdue(Selectedissue.return_data) ? "text-red-600" : "text-green-600"
+                                }`}>
+                                {isOverdue(Selectedissue.return_data)
+                                    ? "❌ Failed - Due Date Passed"
+                                    : "✅ On Time"}
+                            </p>
+
+                        </div>
+                        <div className="flex justify-end space-x-2">
+                            <button
+                                // onClick={handleDownload}
+                                className="mt-4 px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition"
+                            >
+                                📥 Download PDF
+                            </button>
+                            <button
+                                onClick={() => setDownload(false)}
+                                className="mt-4 px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+        </div>
+    )
 }
 
 export default MainIssue

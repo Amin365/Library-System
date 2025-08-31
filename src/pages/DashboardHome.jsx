@@ -255,10 +255,10 @@ const HandleEditBook = (book) => {
 
 
             (
-              <div className=" max-w-7xl mx-auto ">
+              <div className=" max-w-7xl mx-auto  ">
                 <h1 className="mb-9 font-bold md:text-xl text-center text-sm ">Welcome to the Dashboard {profile?.username}</h1>
                 <div className="flex gap-4 flex-wrap md:flex-cols   space-x-2 ">
-                  <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:w-[29%] md:ml-0 ml-4 rounded-md">
+                  <div className="px-6 py-8 bg-white shadow-lg w-full md:w-[29%] md:ml-0 ml-4 rounded-md">
                   
                     <div className="flex items-center gap-12   ">
                     
@@ -272,7 +272,7 @@ const HandleEditBook = (book) => {
                       </div>
                     </div>
                   </div>
-                  <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:w-[29%] md:ml-0 ml-4 rounded-md">
+                  <div className="px-6 py-8 bg-white shadow-lg w-full md:w-[29%] md:ml-0 ml-4 rounded-md">
                     <div className="flex items-center gap-12 ">
                       <div className="bg-green-100 p-4 rounded-lg ">
                         <IoPeopleSharp className="text-4xl text-green-500" />
@@ -284,7 +284,7 @@ const HandleEditBook = (book) => {
                       </div>
                     </div>
                   </div>
-                  <div className="px-6 py-8 bg-white shadow-lg w-[90%] md:ml-0 ml-4 md:w-[29%] rounded-md">
+                  <div className="px-6 py-8 bg-white shadow-lg w-full md:ml-0 ml-4 md:w-[29%] rounded-md">
                     <div className="flex items-center gap-12 py-1 px-2">
                       <div className="bg-green-100 p-4 rounded-lg ">
                         <IoBookOutline className="text-4xl text-green-500" />
@@ -374,7 +374,7 @@ const HandleEditBook = (book) => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
             {/* ✅ New Members */}
             <div className="bg-white p-6 rounded-lg shadow-md max-w-7xl mx-auto w-full">
-              <h3 className="text-lg font-semibold mb-4 text-green-500 bg-green-100 rounded-lg inline px-2 py-3 mb-4">New Members</h3>
+              <h3 className="text-lg font-semibold mb-4 text-green-500 bg-green-100 rounded-lg inline px-2 py-3 ">New Members</h3>
               <table className="w-full text-sm text-left text-gray-700 divide-y divide-gray-500 mt-6">
                 <thead className="bg-gray-50">
                   <tr>
